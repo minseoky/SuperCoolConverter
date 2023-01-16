@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+    /** 시작 시 처음 보여지는 창*/
+    function DefaultPage() {
+        return(
+            <h3>Please Select options</h3>
+        );
+    }
+    function Minutes2Hours() {
+        const [amounts, setAmounts] = React.useState();
+        const [inverted, setInverted] = React.useState(false);
+        const onChange = (e) => {
+            setAmounts(e.target.value);
+        }
+        const invert = () => {
+            setInverted((current) => !current);
+            reset();
+        }
+        const reset = () => {
+            setAmounts(0);
+        }
+        return(
+            <div>
+                <div>
+                    <label htmlFor="minutes">Minutes</label>
+                    <input
+                        id="minutes"
+                        placeholder="Minutes"
+                        type="number"
+                        onChange={onChange}
+                        value={inverted ? amounts*60 : amounts}
+                        disabled={inverted}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="hours">Hours</label>
+                    <input
+                        id="hours"
+                        placeholder="Hours"
+                        type="number"
+                        onChange={onChange}
+                        value={inverted ? amounts : amounts/60}
+                        disabled={!inverted}
+                    />
+                </div>
+                <button onClick={reset}>RESET</button>
+                <button onClick={invert}>INVERT</button>
+            </div>
+        );
+    }
+    function Km2Miles(){
+        const [invert, setInvert] = React.useState(false);
+        const [amount, setAmount] = React.useState(0);
+
+        const onInvert = () => {
+            setInvert((current) => !current);
+            reset();
+        }
+        const changeAmount = (event) => {
+            setAmount(event.target.value);
+        }
+        const reset = () => {
+            setAmount(0);
+        }
+        return(
+            <div>
+                <div>
+                    <label>Km</label>
+                    <input
+                        id="km"
+                        type="number"
+                        placeholder="Km"
+                        disabled={invert}
+                        onChange={changeAmount}
+                        value={invert ? amount*1.609 : amount}
+                    />
+                </div>
+                <div>
+                    <label>Miles</label>
+                    <input
+                        id="miles"
+                        type="number"
+                        placeholder="Miles"
+                        disabled={!invert}
+                        onChange={changeAmount}
+                        value={invert ? amount : amount/1.609}
+                    />
+                </div>
+                <button onClick={reset}>RESET</button>
+                <button onClick={onInvert}>INVERT</button>
+            </div>
+        );
+    }
+    /** 메인 */
+    function App() {
+        const [index,setIndex] = React.useState("K2M");
+        const onSelect = (event) => {
+            setIndex(event.target.value);
+        }
+        return(
+        <div>
+            <h1>Super converter</h1>
+            <select value={index} onChange={onSelect}>
+                <option value="default">Please Select options</option>
+                <option value="M2H">Minutes to Hours</option>
+                <option value="K2M">Km to Miles</option>
+            </select>
+            <hr/>
+            {index == "default" ? <DefaultPage/> : null}
+            {index == "M2H" ? <Minutes2Hours/> : null}
+            {index == "K2M" ? <Km2Miles/> : null}
+        </div>
+        );
+    }
+    const root = document.getElementById('root');
+    ReactDOM.render(<App />, root);
+</script>
+</html>
