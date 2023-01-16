@@ -12,6 +12,42 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script type="text/babel">
+    /** Styles */
+    const pageStyle = {
+        backgroundColor : "powderblue",
+        borderRadius : "20px",
+        width : "400px"
+    }
+    const titleStyle = {
+        backgroundColor : "black",
+        color : "white",
+        textAlign : "center",
+        borderRadius : "20px 20px 0 0",
+        lineHeight : "50px"
+    }
+    const selectStyle = {
+        backgroundColor : "black",
+        color : "white",
+        borderColor : "white",
+        margin : "10px 20px 20px 20px",
+
+    }
+    const labelStyle = {
+        fontWeight : "bolder",
+        display : "inline-block",
+        width : "80px",
+        lineHeight : "30px",
+        margin : "0 0 0 20px"
+    }
+    const inputStyle = {
+        backgroundColor : "black",
+        color : "white",
+        borderColor : "white"
+    }
+    const buttonStyle = {
+        margin : "10px 10px 10px 20px",
+        padding : "5px"
+    }
     /** 시작 시 처음 보여지는 창*/
     function DefaultPage() {
         return(
@@ -34,8 +70,9 @@
         return(
             <div>
                 <div>
-                    <label htmlFor="minutes">Minutes</label>
+                    <label style={labelStyle} htmlFor="minutes">Minutes</label>
                     <input
+                        style={inputStyle}
                         id="minutes"
                         placeholder="Minutes"
                         type="number"
@@ -45,8 +82,9 @@
                     />
                 </div>
                 <div>
-                    <label htmlFor="hours">Hours</label>
+                    <label style={labelStyle} htmlFor="hours">Hours</label>
                     <input
+                        style={inputStyle}
                         id="hours"
                         placeholder="Hours"
                         type="number"
@@ -55,8 +93,8 @@
                         disabled={!inverted}
                     />
                 </div>
-                <button onClick={reset}>RESET</button>
-                <button onClick={invert}>INVERT</button>
+                <button style={buttonStyle} onClick={reset}>RESET</button>
+                <button style={buttonStyle} onClick={invert}>INVERT</button>
             </div>
         );
     }
@@ -75,10 +113,11 @@
             setAmount(0);
         }
         return(
-            <div>
+            <div style={pageStyle}>
                 <div>
-                    <label>Km</label>
+                    <label style={labelStyle} >Km</label>
                     <input
+                        style={inputStyle}
                         id="km"
                         type="number"
                         placeholder="Km"
@@ -88,8 +127,9 @@
                     />
                 </div>
                 <div>
-                    <label>Miles</label>
+                    <label style={labelStyle}>Miles</label>
                     <input
+                        style={inputStyle}
                         id="miles"
                         type="number"
                         placeholder="Miles"
@@ -98,21 +138,21 @@
                         value={invert ? amount : amount/1.609}
                     />
                 </div>
-                <button onClick={reset}>RESET</button>
-                <button onClick={onInvert}>INVERT</button>
+                <button style={buttonStyle} onClick={reset}>RESET</button>
+                <button style={buttonStyle} onClick={onInvert}>INVERT</button>
             </div>
         );
     }
     /** 메인 */
     function App() {
-        const [index,setIndex] = React.useState("K2M");
+        const [index,setIndex] = React.useState("M2H");
         const onSelect = (event) => {
             setIndex(event.target.value);
         }
         return(
-        <div>
-            <h1>Super converter</h1>
-            <select value={index} onChange={onSelect}>
+        <div style={pageStyle}>
+            <h1 style={titleStyle} class="rbg-text">Super Cool Converter</h1>
+            <select style={selectStyle} value={index} onChange={onSelect}>
                 <option value="default">Please Select options</option>
                 <option value="M2H">Minutes to Hours</option>
                 <option value="K2M">Km to Miles</option>
@@ -123,6 +163,7 @@
             {index == "K2M" ? <Km2Miles/> : null}
         </div>
         );
+
     }
     const root = document.getElementById('root');
     ReactDOM.render(<App />, root);
