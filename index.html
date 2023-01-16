@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Super Cool Converter</title>
 </head>
 <body>
 <div id="root"></div>
@@ -51,7 +51,7 @@
     /** 시작 시 처음 보여지는 창*/
     function DefaultPage() {
         return(
-            <h3>Please Select options</h3>
+            <h3 style={{"margin" : "20px", "height" : "40px", "text-align" : "center"}}>Please Select options</h3>
         );
     }
     function Minutes2Hours() {
@@ -145,13 +145,13 @@
     }
     /** 메인 */
     function App() {
-        const [index,setIndex] = React.useState("M2H");
+        const [index,setIndex] = React.useState("default");
         const onSelect = (event) => {
             setIndex(event.target.value);
         }
         return(
         <div style={pageStyle}>
-            <h1 style={titleStyle} class="rbg-text">Super Cool Converter</h1>
+            <h1 style={titleStyle} class="rbg-text"><span style={{"color" : "powderblue"}}>S</span>uper <span style={{"color" : "powderblue"}}>C</span>ool <span style={{"color" : "powderblue"}}>C</span>onverter</h1>
             <select style={selectStyle} value={index} onChange={onSelect}>
                 <option value="default">Please Select options</option>
                 <option value="M2H">Minutes to Hours</option>
