@@ -12,7 +12,7 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script type="text/babel">
-    /** Styles */
+    /* Styles */
     const pageStyle = {
         backgroundColor : "powderblue",
         borderRadius : "20px",
@@ -150,18 +150,22 @@
             setIndex(event.target.value);
         }
         return(
-        <div style={pageStyle}>
-            <h1 style={titleStyle} class="rbg-text"><span style={{"color" : "powderblue"}}>S</span>uper <span style={{"color" : "powderblue"}}>C</span>ool <span style={{"color" : "powderblue"}}>C</span>onverter</h1>
-            <select style={selectStyle} value={index} onChange={onSelect}>
-                <option value="default">Please Select options</option>
-                <option value="M2H">Minutes to Hours</option>
-                <option value="K2M">Km to Miles</option>
-            </select>
-            <hr/>
-            {index == "default" ? <DefaultPage/> : null}
-            {index == "M2H" ? <Minutes2Hours/> : null}
-            {index == "K2M" ? <Km2Miles/> : null}
-        </div>
+            <div>
+                <div style={pageStyle}>
+                    <h1 style={titleStyle} class="rbg-text"><span style={{"color" : "powderblue"}}>S</span>uper <span style={{"color" : "powderblue"}}>C</span>ool <span style={{"color" : "powderblue"}}>C</span>onverter</h1>
+                    <select style={selectStyle} value={index} onChange={onSelect}>
+                        <option value="default">Please Select options</option>
+                        <option value="M2H">Minutes to Hours</option>
+                        <option value="K2M">Km to Miles</option>
+                    </select>
+                    <hr/>
+                    {index == "default" ? <DefaultPage/> : null}
+                    {index == "M2H" ? <Minutes2Hours/> : null}
+                    {index == "K2M" ? <Km2Miles/> : null}
+
+                </div>
+                <div>by <a href="https://github.com/minseoky">minseoky</a></div>
+            </div>
         );
 
     }
